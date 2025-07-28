@@ -2,7 +2,7 @@
 # slogan: Unified Orchestration Platform to Simplify Business-Critical Workflows and Govern them as Code and from the UI.
 # tags: orchestration,workflow,automation
 # logo: svgs/kestra.svg
-# port: 8080
+# port: 7000
 
 volumes:
   postgres-data:
@@ -46,11 +46,6 @@ services:
             username: ${SERVICE_USER_POSTGRES}
             password: ${SERVICE_PASSWORD_POSTGRES}
         kestra:
-          server:
-            basicAuth:
-              enabled: false
-              username: ${KESTRA_EMAIL} # it must be a valid email address
-              password: ${SERVICE_PASSWORD_KESTRA}
           repository:
             type: postgres
           storage:
@@ -62,9 +57,9 @@ services:
           tasks:
             tmpDir:
               path: /tmp/kestra-wd/tmp
-          url: http://0.0.0.0:8080/
+          url: http://0.0.0.0:7000/
     ports:
-      - "8080:8080"
+      - "7000:8080"
       - "8081:8081"
     depends_on:
       postgres:
